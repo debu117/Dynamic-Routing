@@ -45,6 +45,21 @@ app.post("/create", function (req, res) {
     }
   );
 });
+
+app.post("/edit", function (req, res) {
+  fs.rename(
+    `./files/${req.body.previous}`,
+    `./files/${req.body.new}`,
+    function (err) {
+      res.redirect("/");
+    }
+  );
+});
+
+app.get("/edit/:filename", function (req, res) {
+  res.render("edit", { filename: req.params.filename });
+});
+
 app.listen(3000, function () {
   console.log("Its Running on port 3000");
 });
